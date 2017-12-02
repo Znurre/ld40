@@ -2,6 +2,7 @@
 #define WORLD_H
 
 #include "IDrawable.h"
+#include "Map.h"
 
 class World : public IDrawable
 {
@@ -10,10 +11,12 @@ class World : public IDrawable
 
 		void advance();
 
-		void draw(QPainter *painter) override;
+		void draw(QPainter &painter) override;
 		void update(long delta) override;
 
 	private:
+		Map m_maps[2];
+
 		int m_level;
 };
 
