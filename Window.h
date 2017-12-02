@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "TurnHandler.h"
 #include "InputHandler.h"
+#include "CollisionHandler.h"
 
 class Window : public QRasterWindow
 {
@@ -18,9 +19,10 @@ class Window : public QRasterWindow
 		void keyReleaseEvent(QKeyEvent *event) override;
 		void paintEvent(QPaintEvent *event) override;
 
-		World m_world;
+		CollisionHandler m_collisionHandler;
 		Player m_player;
 		TurnHandler m_turnHandler;
+		World m_world;
 		InputHandler m_inputHandler;
 };
 

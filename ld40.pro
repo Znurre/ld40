@@ -7,7 +7,10 @@ SOURCES += \
     MapTile.cpp \
     Player.cpp \
     InputHandler.cpp \
-    TurnHandler.cpp
+    TurnHandler.cpp \
+    Enemy.cpp \
+    CollisionHandler.cpp \
+    Shard.cpp
 
 HEADERS += \
     Window.h \
@@ -19,6 +22,9 @@ HEADERS += \
     Player.h \
     InputHandler.h \
     TurnHandler.h \
-    IPawn.h
+    IPawn.h \
+    Enemy.h \
+    CollisionHandler.h \
+    Shard.h
 
 LIBS += -ltiled

@@ -4,10 +4,14 @@
 #include "IDrawable.h"
 #include "Map.h"
 
+class Player;
+class TurnHandler;
+class CollisionHandler;
+
 class World : public IDrawable
 {
 	public:
-		World();
+		World(Player &player, TurnHandler &turnHandler, CollisionHandler &collisionHandler);
 
 		void advance();
 
@@ -16,6 +20,8 @@ class World : public IDrawable
 
 	private:
 		Map m_maps[2];
+
+		CollisionHandler &m_collisionHandler;
 
 		int m_level;
 };

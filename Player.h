@@ -4,10 +4,15 @@
 #include "IDrawable.h"
 #include "IPawn.h"
 
+class CollisionHandler;
+
 class Player : public IDrawable, public IPawn
 {
 	public:
-		Player();
+		Player(CollisionHandler &collisionHandler);
+
+		int x() const;
+		int y() const;
 
 		void setDirection(int direction);
 
@@ -16,6 +21,8 @@ class Player : public IDrawable, public IPawn
 		void step() override;
 
 	private:
+		CollisionHandler &m_collisionHandler;
+
 		int m_direction;
 		int m_x;
 		int m_y;

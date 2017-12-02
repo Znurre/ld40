@@ -5,16 +5,16 @@ Map::Map()
 {
 }
 
-void Map::addMapTile(MapTile *mapTile)
+void Map::addChild(IDrawable *drawable)
 {
-	m_tiles << mapTile;
+	m_children << drawable;
 }
 
 void Map::draw(QPainter &painter)
 {
-	for (MapTile *tile : m_tiles)
+	for (IDrawable *drawable : m_children)
 	{
-		tile->draw(painter);
+		drawable->draw(painter);
 	}
 }
 

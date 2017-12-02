@@ -10,13 +10,13 @@ class Map : public IDrawable
 	public:
 		Map();
 
-		void addMapTile(MapTile *mapTile);
+		void addChild(IDrawable *drawable);
 
 		void draw(QPainter &painter) override;
 		void update(long delta) override;
 
 	private:
-		QList<MapTile *> m_tiles;
+		QList<IDrawable *> m_children;
 };
 
 #endif // MAP_H
