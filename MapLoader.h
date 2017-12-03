@@ -14,7 +14,7 @@ class MapLoader
 	public:
 		MapLoader(Player &player, TurnHandler &turnHandler, CollisionHandler &collisionHandler, World &world);
 
-		void load(const QString &fileName, Map &map);
+		void load(const QString &fileName);
 
 	private:
 		Player &m_player;

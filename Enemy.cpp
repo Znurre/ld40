@@ -1,9 +1,13 @@
+#include <QDebug>
+#include <QCoreApplication>
+
 #include "Enemy.h"
 #include "Player.h"
 #include "CollisionHandler.h"
 
 Enemy::Enemy(CollisionHandler &collisionHandler, Player &player, int x, int y)
-	: m_collisionHandler(collisionHandler)
+	: m_image("enemy.png")
+	, m_collisionHandler(collisionHandler)
 	, m_player(player)
 	, m_x(x)
 	, m_y(y)
@@ -39,13 +43,17 @@ void Enemy::step()
 
 void Enemy::draw(QPainter &painter)
 {
-	const QRect rect(m_x * TILE_SIZE, m_y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-
-	painter.fillRect(rect, Qt::blue);
+	painter.drawImage((m_x - 1) * TILE_SIZE, (m_y - 1) * TILE_SIZE, m_image);
 }
 
 void Enemy::update(long delta)
 {
+	if (m_x == m_player.x() &&
+		m_y == m_player.y())
+	{
+		qApp->quit();
+	}
+
 	Q_UNUSED(delta);
 }
 

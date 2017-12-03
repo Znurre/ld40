@@ -1,9 +1,8 @@
 #include "MapTile.h"
 #include "Map.h"
 
-MapTile::MapTile(Map &parent, int x, int y)
-	: m_parent(parent)
-	, m_x(x)
+MapTile::MapTile(int x, int y)
+	: m_x(x)
 	, m_y(y)
 {
 }

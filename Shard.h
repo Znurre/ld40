@@ -7,16 +7,17 @@
 class Player;
 class World;
 
-class Shard : public IDrawable, public IPawn
+class Shard : public IDrawable
 {
 	public:
 		Shard(Player &player, World &world, int x, int y);
 
-		void step() override;
 		void draw(QPainter &painter) override;
 		void update(long delta) override;
 
 	private:
+		QImage m_image;
+
 		Player &m_player;
 		World &m_world;
 

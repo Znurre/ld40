@@ -4,10 +4,11 @@
 #include "CollisionHandler.h"
 
 Player::Player(CollisionHandler &collisionHandler)
-	: m_collisionHandler(collisionHandler)
+	: m_image("player.png")
+	, m_collisionHandler(collisionHandler)
 	, m_direction(1)
-	, m_x(0)
-	, m_y(0)
+	, m_x(25)
+	, m_y(25)
 {
 
 }
@@ -29,9 +30,7 @@ void Player::setDirection(int direction)
 
 void Player::draw(QPainter &painter)
 {
-	const QRect rect(m_x * TILE_SIZE, m_y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-
-	painter.fillRect(rect, Qt::green);
+	painter.drawImage((m_x - 1) * TILE_SIZE, (m_y - 1) * TILE_SIZE, m_image);
 }
 
 void Player::update(long delta)

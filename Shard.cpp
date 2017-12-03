@@ -3,7 +3,8 @@
 #include "World.h"
 
 Shard::Shard(Player &player, World &world, int x, int y)
-	: m_player(player)
+	: m_image("shard.png")
+	, m_player(player)
 	, m_world(world)
 	, m_x(x)
 	, m_y(y)
@@ -12,8 +13,20 @@ Shard::Shard(Player &player, World &world, int x, int y)
 
 }
 
-void Shard::step()
+void Shard::draw(QPainter &painter)
 {
+	if (m_picked)
+	{
+		return;
+	}
+
+	painter.drawImage(m_x * TILE_SIZE, m_y * TILE_SIZE, m_image);
+}
+
+void Shard::update(long delta)
+{
+	Q_UNUSED(delta);
+
 	if (m_picked)
 	{
 		return;
@@ -26,21 +39,4 @@ void Shard::step()
 
 		m_picked = true;
 	}
-}
-
-void Shard::draw(QPainter &painter)
-{
-	if (m_picked)
-	{
-		return;
-	}
-
-	const QRect rect(m_x * TILE_SIZE, m_y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-
-	painter.fillRect(rect, Qt::yellow);
-}
-
-void Shard::update(long delta)
-{
-	Q_UNUSED(delta);
 }

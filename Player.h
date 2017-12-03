@@ -21,6 +21,8 @@ class Player : public IDrawable, public IPawn
 		void step() override;
 
 	private:
+		QImage m_image;
+
 		CollisionHandler &m_collisionHandler;
 
 		int m_direction;

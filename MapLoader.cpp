@@ -12,6 +12,7 @@
 #include "TurnHandler.h"
 #include "CollisionHandler.h"
 #include "Shard.h"
+#include "World.h"
 
 MapLoader::MapLoader(Player &player, TurnHandler &turnHandler, CollisionHandler &collisionHandler, World &world)
 	: m_player(player)
@@ -22,7 +23,7 @@ MapLoader::MapLoader(Player &player, TurnHandler &turnHandler, CollisionHandler 
 
 }
 
-void MapLoader::load(const QString &fileName, Map &map)
+void MapLoader::load(const QString &fileName)
 {
 	Tiled::MapReader mapReader;
 
@@ -43,22 +44,20 @@ void MapLoader::load(const QString &fileName, Map &map)
 					Tiled::Cell cell = tileLayer->cellAt(x, y);
 					Tiled::Tile *tile = cell.tile();
 
-					if (tileLayer->property("collidable") == true)
+					if (tile)
 					{
-						if (tile)
+						if (tileLayer->property("collidable") == true)
 						{
 							m_collisionHandler.setCollidable(x, y);
 						}
-					}
-					else
-					{
-						MapTile *mapTile = new MapTile(map, x, y);
+						else
+						{
+							MapTile *mapTile = m_world.tileAt(x, y);
 
-						const QPixmap &image = tile->image();
+							const QPixmap &image = tile->image();
 
-						mapTile->setImage(image);
-
-						map.addChild(mapTile);
+							mapTile->setImage(image);
+						}
 					}
 				}
 			}
@@ -79,7 +78,7 @@ void MapLoader::load(const QString &fileName, Map &map)
 				{
 					Enemy *enemy = new Enemy(m_collisionHandler, m_player, x, y);
 
-					map.addChild(enemy);
+					m_world.addObject(enemy);
 
 					m_turnHandler.add(*enemy);
 				}
@@ -88,9 +87,7 @@ void MapLoader::load(const QString &fileName, Map &map)
 				{
 					Shard *shard = new Shard(m_player, m_world, x, y);
 
-					map.addChild(shard);
-
-					m_turnHandler.add(*shard);
+					m_world.addObject(shard);
 				}
 			}
 		}

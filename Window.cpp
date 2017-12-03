@@ -12,21 +12,11 @@ Window::Window()
 
 void Window::keyPressEvent(QKeyEvent *event)
 {
-	if (event->isAutoRepeat())
-	{
-		return;
-	}
-
 	m_inputHandler.onKeyPress(event);
 }
 
 void Window::keyReleaseEvent(QKeyEvent *event)
 {
-	if (event->isAutoRepeat())
-	{
-		return;
-	}
-
 	if (event->key() == Qt::Key_Space)
 	{
 		m_world.advance();
@@ -43,7 +33,7 @@ void Window::paintEvent(QPaintEvent *event)
 
 	const QRect &viewport = painter.viewport();
 
-	painter.fillRect(viewport, Qt::black);
+	painter.fillRect(viewport, QColor("#211e27"));
 
 	const int cx = viewport.width() / 2 - (m_player.x() * TILE_SIZE);
 	const int cy = viewport.height() / 2 - (m_player.y() * TILE_SIZE);

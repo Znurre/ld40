@@ -8,7 +8,7 @@ class Map;
 class MapTile : public IDrawable
 {
 	public:
-		MapTile(Map &parent, int x, int y);
+		MapTile(int x, int y);
 
 		void setImage(const QPixmap &image);
 
@@ -16,8 +16,6 @@ class MapTile : public IDrawable
 		void update(long delta) override;
 
 	private:
-		Map &m_parent;
-
 		int m_x;
 		int m_y;
 

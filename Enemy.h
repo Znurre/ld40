@@ -17,6 +17,8 @@ class Enemy : public IDrawable, public IPawn
 		void update(long delta) override;
 
 	private:
+		QImage m_image;
+
 		QList<QPoint> getCandidates(int dx, int dy) const;
 
 		CollisionHandler &m_collisionHandler;

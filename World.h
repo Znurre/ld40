@@ -2,7 +2,8 @@
 #define WORLD_H
 
 #include "IDrawable.h"
-#include "Map.h"
+#include "MapTile.h"
+#include "MapLoader.h"
 
 class Player;
 class TurnHandler;
@@ -15,13 +16,18 @@ class World : public IDrawable
 
 		void advance();
 
+		MapTile *tileAt(int x, int y);
+
+		void addObject(IDrawable *drawable);
+
 		void draw(QPainter &painter) override;
 		void update(long delta) override;
 
 	private:
-		Map m_maps[2];
-
+		MapLoader m_mapLoader;
 		CollisionHandler &m_collisionHandler;
+
+		QList<IDrawable *> m_objects;
 
 		int m_level;
 };
